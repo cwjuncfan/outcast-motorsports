@@ -103,13 +103,21 @@
               <input type="text" id="req-discord" name="discord" placeholder="username">
             </div>
             <div class="form-group">
-              <label for="requested-series">Series</label>
-              <select id="requested-series" name="series" required>
-                <option value="">Select series...</option>
-                <option value="Next Gen">Next Gen</option>
-                <option value="Trucks">Trucks</option>
-                <option value="Gen 6">Gen 6</option>
-              </select>
+              <label>Series <span style="color:var(--text-muted);font-weight:400;">(select all that apply)</span></label>
+              <div style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:0.5rem;">
+                <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-weight:500;">
+                  <input type="checkbox" name="series" value="Next Gen" id="series-nextgen">
+                  <span style="color:#68d391;">Next Gen</span>
+                </label>
+                <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-weight:500;">
+                  <input type="checkbox" name="series" value="Trucks" id="series-trucks">
+                  <span style="color:#fc8181;">Trucks</span>
+                </label>
+                <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-weight:500;">
+                  <input type="checkbox" name="series" value="Gen 6" id="series-gen6">
+                  <span style="color:#63b3ed;">Gen 6</span>
+                </label>
+              </div>
             </div>
             <div class="form-group">
               <label for="requested-number">Requested Number (1–99)</label>

@@ -72,9 +72,16 @@ function renderNumberGrid(gridId, seriesName) {
       cell.title = 'Available – ' + seriesName + ' (click to request)';
       cell.style.cursor = 'pointer';
       cell.addEventListener('click', () => {
-        const seriesInput = document.getElementById('requested-series');
+        // Check the matching series checkbox
+        const map = {
+          'Next Gen': 'series-nextgen',
+          'Trucks': 'series-trucks',
+          'Gen 6': 'series-gen6'
+        };
+        const cb = document.getElementById(map[seriesName]);
+        if (cb) cb.checked = true;
+
         const numberInput = document.getElementById('requested-number');
-        if (seriesInput) seriesInput.value = seriesName;
         if (numberInput) {
           numberInput.value = String(i);
           numberInput.focus();
