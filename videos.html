@@ -40,6 +40,14 @@
       <h2>Broadcasts & Race Videos</h2>
     </div>
 
+    <div id="twitch-live-badge" style="display:none; margin-bottom:1.25rem;">
+      <div class="notice" style="border-color:rgba(229,62,62,0.5); background:rgba(229,62,62,0.12);">
+        <strong style="color:#fc8181;">🔴 LIVE NOW</strong>
+        <span id="twitch-live-title" style="color:var(--text-muted); margin-left:0.5rem;"></span>
+        <a href="https://www.twitch.tv/outcastmotorsportsnetwork" target="_blank" rel="noopener" class="btn btn-gold" style="margin-left:0.75rem; display:inline-block; text-decoration:none; padding:0.4rem 0.9rem; font-size:0.9rem;">Watch on Twitch →</a>
+      </div>
+    </div>
+
     <section class="section">
       <div class="card" style="text-align:center;">
         <h3 style="margin-bottom:0.5rem;">Watch Live on Twitch</h3>
@@ -94,5 +102,27 @@
   </footer>
 
   <script src="js/main.js"></script>
+
+  <script>
+    (function () {
+      const WORKER_URL = 'https://outcast-twitch-live.c-jones-woodland.workers.dev/';
+      const badge = document.getElementById('twitch-live-badge');
+      const titleEl = document.getElementById('twitch-live-title');
+      if (!badge) return;
+
+      fetch(WORKER_URL)
+        .then(r => r.json())
+        .then(data => {
+          if (data && data.live) {
+            badge.style.display = 'block';
+            if (titleEl && data.title) {
+              titleEl.textContent = '— ' + data.title;
+            }
+          }
+        })
+        .catch(() => { /* offline / error: keep badge hidden */ });
+    })();
+  </script>
+
 </body>
 </html>
