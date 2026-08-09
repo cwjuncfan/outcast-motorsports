@@ -95,10 +95,18 @@ function yesNoBadge(val) {
 function seriesBadges(seriesArr) {
   if (!seriesArr || !seriesArr.length) return '—';
   return seriesArr.map(s => {
-    let color = 'var(--blue-accent)';
-    if (s === 'Trucks') color = 'var(--gold-light)';
-    if (s === 'Gen 6')  color = '#a78bfa';
-    return `<span class="badge" style="margin:2px;background:rgba(59,158,255,0.15);color:${color};">${s}</span>`;
+    // Match Car Numbers page colors
+    let color = '#68d391';      // Next Gen - green
+    let bg = 'rgba(104,211,145,0.15)';
+    if (s === 'Trucks') {
+      color = '#fc8181';    // red
+      bg = 'rgba(252,129,129,0.15)';
+    }
+    if (s === 'Gen 6') {
+      color = '#63b3ed';     // light blue
+      bg = 'rgba(99,179,237,0.15)';
+    }
+    return `<span class="badge" style="margin:2px;background:${bg};color:${color};">${s}</span>`;
   }).join(' ');
 }
 
