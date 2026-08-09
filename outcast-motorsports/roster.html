@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Roster | OutCast Motorsports</title>
-  <meta name="description" content="OutCast Motorsports league roster – members and car numbers.">
+  <meta name="description" content="OutCast Motorsports league roster – members, car numbers, and series.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -22,6 +22,7 @@
       <nav class="main-nav">
         <a href="index.html">Home</a>
         <a href="rules.html">Rules</a>
+        <a href="points.html">Points</a>
         <a href="roster.html" class="active">Roster</a>
         <a href="numbers.html">Car Numbers</a>
         <a href="join.html">Join</a>
@@ -40,7 +41,7 @@
     </div>
 
     <div class="notice">
-      <strong>Note:</strong> This page currently shows sample / placeholder data. Provide the real member list (name, car number, iRacing name, preferred class/series if desired) and I will update it. The Car Numbers page automatically marks numbers as taken based on this roster.
+      <strong>Note:</strong> (A) = Admin &nbsp;·&nbsp; (C) = Champion &nbsp;·&nbsp; iRacing IDs can be added over time — once filled in they become clickable profile links.
     </div>
 
     <section class="section">
@@ -50,32 +51,21 @@
             <tr>
               <th>Car #</th>
               <th>Driver Name</th>
-              <th>iRacing Name</th>
-              <th>Class / Series</th>
+              <th>iRacing ID</th>
+              <th>Joined Date</th>
+              <th>Discord</th>
+              <th>League</th>
+              <th>Series</th>
             </tr>
           </thead>
           <tbody id="roster-body">
-            <!-- Populated by JS from SAMPLE_ROSTER -->
+            <!-- Populated by JS -->
           </tbody>
         </table>
       </div>
       <p class="mt-2" style="color: var(--text-muted); font-size: 0.9rem;">
-        Total members shown: sample data only. Real roster will replace this once provided.
+        Series: Next Gen · Trucks · Gen 6 &nbsp;|&nbsp; Active drivers shown. Empty numbers are available.
       </p>
-    </section>
-
-    <section class="section">
-      <div class="card">
-        <h3>What appears on this page?</h3>
-        <p>Please confirm exactly what columns and info you want displayed for each member. Current planned columns:</p>
-        <ul class="rules-list">
-          <li>Car Number</li>
-          <li>Driver / Display Name</li>
-          <li>iRacing Name / ID</li>
-          <li>Class or preferred series (optional)</li>
-        </ul>
-        <p class="mt-2">Additional options (tell me if you want them): Discord handle, join date, championship points, country flag, profile photo, etc.</p>
-      </div>
     </section>
   </main>
 

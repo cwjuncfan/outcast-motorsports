@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Broadcasts & Race Videos | OutCast Motorsports</title>
+  <meta name="description" content="Watch OutCast Motorsports race broadcasts live on Twitch.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,6 +22,7 @@
       <nav class="main-nav">
         <a href="index.html">Home</a>
         <a href="rules.html">Rules</a>
+        <a href="points.html">Points</a>
         <a href="roster.html">Roster</a>
         <a href="numbers.html">Car Numbers</a>
         <a href="join.html">Join</a>
@@ -38,11 +40,56 @@
       <h2>Broadcasts & Race Videos</h2>
     </div>
 
-    <div class="coming-soon">
-      <h2>Coming Soon</h2>
-      <p>Previous race broadcasts, highlights, and the upcoming broadcast schedule will appear here once available.</p>
-      <p class="mt-2" style="color:var(--text-muted); font-size:0.9rem;">Provide YouTube / Twitch playlist links, embed codes, or schedule details when ready and this page will be updated.</p>
+    <div id="twitch-live-badge" style="display:none; margin-bottom:1.25rem;">
+      <div class="notice" style="border-color:rgba(229,62,62,0.5); background:rgba(229,62,62,0.12);">
+        <strong style="color:#fc8181;">🔴 LIVE NOW</strong>
+        <span id="twitch-live-title" style="color:var(--text-muted); margin-left:0.5rem;"></span>
+        <a href="https://www.twitch.tv/outcastmotorsportsnetwork" target="_blank" rel="noopener" class="btn btn-gold" style="margin-left:0.75rem; display:inline-block; text-decoration:none; padding:0.4rem 0.9rem; font-size:0.9rem;">Watch on Twitch →</a>
+      </div>
     </div>
+
+    <section class="section">
+      <div class="card" style="text-align:center;">
+        <h3 style="margin-bottom:0.5rem;">Watch Live on Twitch</h3>
+        <p style="color:var(--text-muted); margin-bottom:1.25rem;">
+          Catch OutCast Motorsports race broadcasts, commentary, and highlights on our official Twitch channel.
+        </p>
+        <a href="https://www.twitch.tv/outcastmotorsportsnetwork" target="_blank" rel="noopener" class="btn btn-gold" style="display:inline-block; text-decoration:none;">
+          Watch on Twitch →
+        </a>
+        <p class="mt-2" style="color:var(--text-muted); font-size:0.9rem;">
+          <a href="https://www.twitch.tv/outcastmotorsportsnetwork" target="_blank" rel="noopener" style="color:var(--blue-accent);">twitch.tv/outcastmotorsportsnetwork</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card">
+        <h3>Never miss a race</h3>
+        <p style="color:var(--text-muted); margin-bottom:0.75rem;">
+          <strong style="color:var(--text-light);">Follow us on Twitch</strong> and turn on notifications so you’re alerted the moment the broadcast goes live.
+        </p>
+        <ul class="rules-list">
+          <li>Open <a href="https://www.twitch.tv/outcastmotorsportsnetwork" target="_blank" rel="noopener">twitch.tv/outcastmotorsportsnetwork</a></li>
+          <li>Click <strong>Follow</strong> (and enable notifications)</li>
+          <li>On mobile, allow push alerts for the Twitch app</li>
+        </ul>
+        <p class="mt-2" style="color:var(--text-muted); font-size:0.9rem;">
+          A live “ON AIR” badge on this page is planned for a future update.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card">
+        <h3>About the broadcasts</h3>
+        <ul class="rules-list">
+          <li>Live race coverage when the league is on track</li>
+          <li>Follow the channel for stream schedules and VODs</li>
+          <li>Past races and highlights will be linked here as they become available</li>
+        </ul>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -55,5 +102,27 @@
   </footer>
 
   <script src="js/main.js"></script>
+
+  <script>
+    (function () {
+      const WORKER_URL = 'https://outcast-twitch-live.c-jones-woodland.workers.dev/';
+      const badge = document.getElementById('twitch-live-badge');
+      const titleEl = document.getElementById('twitch-live-title');
+      if (!badge) return;
+
+      fetch(WORKER_URL)
+        .then(r => r.json())
+        .then(data => {
+          if (data && data.live) {
+            badge.style.display = 'block';
+            if (titleEl && data.title) {
+              titleEl.textContent = '— ' + data.title;
+            }
+          }
+        })
+        .catch(() => { /* offline / error: keep badge hidden */ });
+    })();
+  </script>
+
 </body>
 </html>
