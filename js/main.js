@@ -26,14 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Sample roster data (replace with real data later)
-// number = car number (no leading zero)
-// iRacingId = Customer ID number (used for profile link)
+// Format: { number: string, name: string, iRacingName: string, car?: string }
 const SAMPLE_ROSTER = [
-  { number: '7', name: 'Admin Example', iRacingId: '100001', car: 'N/A' },
-  { number: '14', name: 'Driver One', iRacingId: '100002', car: 'GT3' },
-  { number: '22', name: 'Driver Two', iRacingId: '100003', car: 'NASCAR' },
-  { number: '48', name: 'Driver Three', iRacingId: '100004', car: 'Formula' },
-  { number: '69', name: 'Driver Four', iRacingId: '100005', car: 'Sports Car' },
+  { number: '07', name: 'Admin Example', iRacingName: 'Admin.OutCast', car: 'N/A' },
+  { number: '14', name: 'Driver One', iRacingName: 'Driver1_iR', car: 'GT3' },
+  { number: '22', name: 'Driver Two', iRacingName: 'Driver2_iR', car: 'NASCAR' },
+  { number: '48', name: 'Driver Three', iRacingName: 'Driver3_iR', car: 'Formula' },
+  { number: '69', name: 'Driver Four', iRacingName: 'Driver4_iR', car: 'Sports Car' },
 ];
 
 // Taken numbers set from roster
@@ -81,11 +80,10 @@ function renderRoster() {
 
   SAMPLE_ROSTER.forEach(member => {
     const tr = document.createElement('tr');
-    const profileUrl = `https://members.iracing.com/membersite/member/Profile.do?custid=${member.iRacingId}`;
     tr.innerHTML = `
       <td class="car-number">#${member.number}</td>
       <td>${member.name}</td>
-      <td><a href="${profileUrl}" target="_blank" rel="noopener" title="View iRacing Profile">${member.iRacingId}</a></td>
+      <td>${member.iRacingName}</td>
       <td>${member.car || '—'}</td>
     `;
     tbody.appendChild(tr);
