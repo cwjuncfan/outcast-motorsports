@@ -91,7 +91,7 @@ const SAMPLE_ROSTER = [
   { number: '71', name: 'Terry Litwiler (A)', iRacingId: '', joinDate: '2025-02-21', discord: true, league: true, series: ["Next Gen", "Trucks", "Gen 6"] },
   { number: '72', name: 'Michael Cordray', iRacingId: '', joinDate: '2026-05-25', discord: true, league: true, series: ["Trucks"] },
   { number: '73', name: 'David Duvail', iRacingId: '', joinDate: '2025-08-01', discord: true, league: true, series: ["Next Gen", "Trucks"] },
-  { number: '74', name: 'Jakob Ainsworth', iRacingId: '', joinDate: '2025-07-27', discord: true, league: true, series: ["Next Gen", "Trucks", "Gen 6"] },
+  { number: '74', name: 'Jakob Ainsworth (A)', iRacingId: '', joinDate: '2025-07-27', discord: true, league: true, series: ["Next Gen", "Trucks", "Gen 6"] },
   { number: '77', name: 'Joshua Yarbrough (C)', iRacingId: '', joinDate: '2025-02-22', discord: true, league: true, series: ["Trucks", "Gen 6"] },
   { number: '78', name: 'James Watson***', iRacingId: '', joinDate: '2025-10-01', discord: true, league: true, series: ["Trucks", "Gen 6"] },
   { number: '80', name: 'Scott Ford***', iRacingId: '', joinDate: '2026-03-13', discord: true, league: true, series: ["Gen 6"] },
