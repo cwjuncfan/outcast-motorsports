@@ -50,7 +50,7 @@ function renderNumberGrid() {
   for (let i = 1; i <= 99; i++) {
     const cell = document.createElement('div');
     cell.className = 'num-cell';
-    cell.textContent = i < 10 ? '0' + i : String(i);
+    cell.textContent = String(i);
     
     if (taken.has(i)) {
       cell.classList.add('taken');
