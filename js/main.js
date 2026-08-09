@@ -68,7 +68,7 @@ const SAMPLE_ROSTER = [
   { number: '33', name: 'Sean Roether', iRacingId: '', joinDate: '2025-04-05', discord: true, league: true, series: ["Next Gen", "Trucks", "Gen 6"] },
   { number: '34', name: 'Dalton Hall', iRacingId: '', joinDate: '2025-11-17', discord: true, league: true, series: ["Next Gen", "Trucks", "Gen 6"] },
   { number: '35', name: 'Kyle Barrington', iRacingId: '', joinDate: '2026-01-13', discord: true, league: true, series: ["Trucks", "Gen 6"] },
-  { number: '39', name: 'Christopher Jones', iRacingId: '', joinDate: '2026-04-21', discord: true, league: true, series: ["Next Gen", "Trucks", "Gen 6"] },
+  { number: '39', name: 'Christopher Jones', iRacingId: '1016061', joinDate: '2026-04-21', discord: true, league: true, series: ["Next Gen", "Trucks", "Gen 6"] },
   { number: '41', name: 'Marcus Monson', iRacingId: '', joinDate: '2026-06-06', discord: true, league: true, series: ["Next Gen", "Trucks", "Gen 6"] },
   { number: '42', name: 'Ben Dalton', iRacingId: '', joinDate: '2026-07-02', discord: true, league: true, series: ["Next Gen"] },
   { number: '43', name: 'Drew Calvert', iRacingId: '', joinDate: '2025-11-16', discord: true, league: true, series: ["Next Gen", "Trucks", "Gen 6"] },
