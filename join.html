@@ -72,8 +72,8 @@
           </div>
 
           <div class="form-group">
-            <label for="join-iracing">iRacing Name / ID</label>
-            <input type="text" id="join-iracing" name="iracing" required placeholder="Exactly as shown in iRacing">
+            <label for="join-iracing">iRacing ID</label>
+            <input type="text" id="join-iracing" name="iracing" required placeholder="Customer ID number (e.g. 1016061)">
           </div>
 
           <div class="form-row">
@@ -91,14 +91,23 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="join-preferred-number">Preferred Car Number (optional)</label>
-            <input type="text" id="join-preferred-number" name="preferrednumber" placeholder="Leave blank if no preference – check availability first">
-          </div>
 
           <div class="form-group">
-            <label for="join-experience">Racing Experience / Classes you drive</label>
-            <textarea id="join-experience" name="experience" placeholder="e.g. GT3, Oval, Formula, how long you've been on iRacing..."></textarea>
+            <label>Series interested in <span style="color:var(--text-muted);font-weight:400;">(select all that apply)</span></label>
+            <div style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:0.5rem;">
+              <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-weight:500;">
+                <input type="checkbox" name="series" value="Next Gen" id="join-series-nextgen">
+                <span style="color:#68d391;">Next Gen</span>
+              </label>
+              <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-weight:500;">
+                <input type="checkbox" name="series" value="Trucks" id="join-series-trucks">
+                <span style="color:#fc8181;">Trucks</span>
+              </label>
+              <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-weight:500;">
+                <input type="checkbox" name="series" value="Gen 6" id="join-series-gen6">
+                <span style="color:#63b3ed;">Gen 6</span>
+              </label>
+            </div>
           </div>
 
           <div class="form-group">
