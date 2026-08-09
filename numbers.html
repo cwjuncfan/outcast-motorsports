@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Car Numbers | OutCast Motorsports</title>
-  <meta name="description" content="Available car numbers for OutCast Motorsports. Request or change your number.">
+  <meta name="description" content="Available car numbers for Next Gen, Trucks, and Gen 6 series – OutCast Motorsports.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -41,23 +41,42 @@
     </div>
 
     <div class="notice">
-      Numbers shown as taken (✕) are currently assigned on the <a href="roster.html">Roster</a>. Click any available (green) number to auto-fill the request form below. This list is driven by the roster data — when the roster is updated, taken numbers update automatically.
+      There are <strong>three separate number sets</strong> — one for each series. A number can be taken in one series and still available in another. Click any green number to auto-fill the request form below.
     </div>
 
+    <div class="legend">
+      <div class="legend-item">
+        <span class="legend-swatch" style="background:rgba(56,161,105,0.25); border-color:rgba(56,161,105,0.5);"></span>
+        Available
+      </div>
+      <div class="legend-item">
+        <span class="legend-swatch" style="background:rgba(229,62,62,0.2); border-color:rgba(229,62,62,0.4);"></span>
+        Taken
+      </div>
+    </div>
+
+    <!-- Next Gen -->
     <section class="section">
-      <div class="legend">
-        <div class="legend-item">
-          <span class="legend-swatch" style="background:rgba(56,161,105,0.25); border-color:rgba(56,161,105,0.5);"></span>
-          Available
-        </div>
-        <div class="legend-item">
-          <span class="legend-swatch" style="background:rgba(229,62,62,0.2); border-color:rgba(229,62,62,0.4);"></span>
-          Taken
-        </div>
+      <div class="section-header">
+        <h2 style="font-size: 1.35rem; color: var(--blue-accent);">Next Gen</h2>
       </div>
-      <div id="number-grid" class="number-grid">
-        <!-- Populated by JS -->
+      <div id="number-grid-nextgen" class="number-grid"></div>
+    </section>
+
+    <!-- Trucks -->
+    <section class="section">
+      <div class="section-header">
+        <h2 style="font-size: 1.35rem; color: var(--gold-light);">Trucks</h2>
       </div>
+      <div id="number-grid-trucks" class="number-grid"></div>
+    </section>
+
+    <!-- Gen 6 -->
+    <section class="section">
+      <div class="section-header">
+        <h2 style="font-size: 1.35rem; color: #a78bfa;">Gen 6</h2>
+      </div>
+      <div id="number-grid-gen6" class="number-grid"></div>
     </section>
 
     <div class="two-col">
@@ -82,6 +101,15 @@
             <div class="form-group">
               <label for="req-discord">Discord Username</label>
               <input type="text" id="req-discord" name="discord" placeholder="username">
+            </div>
+            <div class="form-group">
+              <label for="requested-series">Series</label>
+              <select id="requested-series" name="series" required>
+                <option value="">Select series...</option>
+                <option value="Next Gen">Next Gen</option>
+                <option value="Trucks">Trucks</option>
+                <option value="Gen 6">Gen 6</option>
+              </select>
             </div>
             <div class="form-group">
               <label for="requested-number">Requested Number (1–99)</label>
@@ -115,12 +143,21 @@
               <input type="email" id="chg-email" name="email" required>
             </div>
             <div class="form-group">
+              <label for="chg-series">Series</label>
+              <select id="chg-series" name="series" required>
+                <option value="">Select series...</option>
+                <option value="Next Gen">Next Gen</option>
+                <option value="Trucks">Trucks</option>
+                <option value="Gen 6">Gen 6</option>
+              </select>
+            </div>
+            <div class="form-group">
               <label for="chg-current">Current Number</label>
               <input type="text" id="chg-current" name="current" required placeholder="e.g. 14">
             </div>
             <div class="form-group">
               <label for="chg-new">Desired New Number</label>
-              <input type="text" id="chg-new" name="newnumber" required placeholder="e.g. 07">
+              <input type="text" id="chg-new" name="newnumber" required placeholder="e.g. 7">
             </div>
             <div class="form-group">
               <label for="chg-reason">Reason for change</label>

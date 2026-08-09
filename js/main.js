@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
       nav.classList.toggle('open');
       toggle.setAttribute('aria-expanded', nav.classList.contains('open'));
     });
-    // Close on link click (mobile)
     nav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => nav.classList.remove('open'));
     });
@@ -25,90 +24,124 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Sample roster data (replace with real data later)
-// number = car number (no leading zero)
-// iRacingId = Customer ID number (used for profile link)
+/*
+  Roster data structure:
+  number      - car number (1-99, no leading zero)
+  name        - driver display name
+  iRacingId   - Customer ID (clickable profile link; leave blank until known)
+  joinDate    - e.g. "2025-03-15" or "Mar 2025"
+  discord     - true/false
+  league      - true/false
+  series      - array of series the driver is in: "Next Gen", "Trucks", "Gen 6"
+*/
 const SAMPLE_ROSTER = [
-  { number: '7', name: 'Admin Example', iRacingId: '100001', car: 'N/A' },
-  { number: '14', name: 'Driver One', iRacingId: '100002', car: 'GT3' },
-  { number: '22', name: 'Driver Two', iRacingId: '100003', car: 'NASCAR' },
-  { number: '48', name: 'Driver Three', iRacingId: '100004', car: 'Formula' },
-  { number: '69', name: 'Driver Four', iRacingId: '100005', car: 'Sports Car' },
+  { number: '7',  name: 'Admin Example', iRacingId: '', joinDate: '2024-01-10', discord: true,  league: true,  series: ['Next Gen', 'Trucks', 'Gen 6'] },
+  { number: '14', name: 'Driver One',    iRacingId: '', joinDate: '2024-06-22', discord: true,  league: true,  series: ['Next Gen'] },
+  { number: '22', name: 'Driver Two',    iRacingId: '', joinDate: '2025-01-05', discord: true,  league: false, series: ['Trucks'] },
+  { number: '48', name: 'Driver Three',  iRacingId: '', joinDate: '2025-02-18', discord: false, league: true,  series: ['Gen 6'] },
+  { number: '69', name: 'Driver Four',   iRacingId: '', joinDate: '2025-03-01', discord: true,  league: true,  series: ['Next Gen', 'Trucks'] },
 ];
 
-// Taken numbers set from roster
-function getTakenNumbers() {
-  return new Set(SAMPLE_ROSTER.map(m => parseInt(m.number, 10)));
+function getTakenNumbers(seriesName) {
+  const taken = new Set();
+  SAMPLE_ROSTER.forEach(m => {
+    if (m.series && m.series.includes(seriesName)) {
+      taken.add(parseInt(m.number, 10));
+    }
+  });
+  return taken;
 }
 
-// Render number grid if element exists
-function renderNumberGrid() {
-  const grid = document.getElementById('number-grid');
+function renderNumberGrid(gridId, seriesName) {
+  const grid = document.getElementById(gridId);
   if (!grid) return;
 
-  const taken = getTakenNumbers();
-  // Common league numbers 1-99
+  const taken = getTakenNumbers(seriesName);
+  grid.innerHTML = '';
+
   for (let i = 1; i <= 99; i++) {
     const cell = document.createElement('div');
     cell.className = 'num-cell';
     cell.textContent = String(i);
-    
+
     if (taken.has(i)) {
       cell.classList.add('taken');
-      cell.title = 'Taken';
+      cell.title = 'Taken – ' + seriesName;
     } else {
       cell.classList.add('available');
-      cell.title = 'Available – click to request';
+      cell.title = 'Available – ' + seriesName + ' (click to request)';
       cell.style.cursor = 'pointer';
       cell.addEventListener('click', () => {
-        const input = document.getElementById('requested-number');
-        if (input) {
-          input.value = cell.textContent;
-          input.focus();
-          // Scroll to form
-          document.getElementById('request-form')?.scrollIntoView({ behavior: 'smooth' });
+        const seriesInput = document.getElementById('requested-series');
+        const numberInput = document.getElementById('requested-number');
+        if (seriesInput) seriesInput.value = seriesName;
+        if (numberInput) {
+          numberInput.value = String(i);
+          numberInput.focus();
         }
+        document.getElementById('request-form')?.scrollIntoView({ behavior: 'smooth' });
       });
     }
     grid.appendChild(cell);
   }
 }
 
-// Render roster table if element exists
+function yesNoBadge(val) {
+  if (val === true)  return '<span class="badge" style="background:rgba(56,161,105,0.25);color:#68d391;">Yes</span>';
+  if (val === false) return '<span class="badge" style="background:rgba(229,62,62,0.2);color:#fc8181;">No</span>';
+  return '—';
+}
+
+function seriesBadges(seriesArr) {
+  if (!seriesArr || !seriesArr.length) return '—';
+  return seriesArr.map(s => {
+    let color = 'var(--blue-accent)';
+    if (s === 'Trucks') color = 'var(--gold-light)';
+    if (s === 'Gen 6')  color = '#a78bfa';
+    return `<span class="badge" style="margin:2px;background:rgba(59,158,255,0.15);color:${color};">${s}</span>`;
+  }).join(' ');
+}
+
 function renderRoster() {
   const tbody = document.getElementById('roster-body');
   if (!tbody) return;
 
+  tbody.innerHTML = '';
   SAMPLE_ROSTER.forEach(member => {
     const tr = document.createElement('tr');
-    const profileUrl = `https://members.iracing.com/membersite/member/Profile.do?custid=${member.iRacingId}`;
+    let idCell = '—';
+    if (member.iRacingId) {
+      const url = `https://members.iracing.com/membersite/member/Profile.do?custid=${member.iRacingId}`;
+      idCell = `<a href="${url}" target="_blank" rel="noopener" title="View iRacing Profile">${member.iRacingId}</a>`;
+    }
+
     tr.innerHTML = `
       <td class="car-number">#${member.number}</td>
       <td>${member.name}</td>
-      <td><a href="${profileUrl}" target="_blank" rel="noopener" title="View iRacing Profile">${member.iRacingId}</a></td>
-      <td>${member.car || '—'}</td>
+      <td>${idCell}</td>
+      <td>${member.joinDate || '—'}</td>
+      <td>${yesNoBadge(member.discord)}</td>
+      <td>${yesNoBadge(member.league)}</td>
+      <td>${seriesBadges(member.series)}</td>
     `;
     tbody.appendChild(tr);
   });
 }
 
-// Form success feedback (client-side demo)
 function handleFormSubmit(e, formId) {
   e.preventDefault();
   const form = document.getElementById(formId);
   if (!form) return;
-  
+
   const btn = form.querySelector('button[type="submit"]');
   const originalText = btn.textContent;
   btn.disabled = true;
   btn.textContent = 'Submitting...';
-  
-  // Simulate submission (replace with real endpoint later)
+
   setTimeout(() => {
     btn.textContent = '✓ Submitted!';
     btn.style.background = 'linear-gradient(135deg, #276749, #38a169)';
-    
-    // Show notice
+
     let notice = form.querySelector('.form-success');
     if (!notice) {
       notice = document.createElement('div');
@@ -116,9 +149,9 @@ function handleFormSubmit(e, formId) {
       notice.innerHTML = '<strong>Thank you!</strong> Your request has been received. An admin will review and respond via email or Discord.';
       form.appendChild(notice);
     }
-    
+
     form.reset();
-    
+
     setTimeout(() => {
       btn.disabled = false;
       btn.textContent = originalText;
@@ -128,22 +161,17 @@ function handleFormSubmit(e, formId) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderNumberGrid();
+  renderNumberGrid('number-grid-nextgen', 'Next Gen');
+  renderNumberGrid('number-grid-trucks', 'Trucks');
+  renderNumberGrid('number-grid-gen6', 'Gen 6');
   renderRoster();
-  
-  // Attach form handlers
+
   const joinForm = document.getElementById('join-form');
-  if (joinForm) {
-    joinForm.addEventListener('submit', (e) => handleFormSubmit(e, 'join-form'));
-  }
-  
+  if (joinForm) joinForm.addEventListener('submit', (e) => handleFormSubmit(e, 'join-form'));
+
   const requestForm = document.getElementById('number-request-form');
-  if (requestForm) {
-    requestForm.addEventListener('submit', (e) => handleFormSubmit(e, 'number-request-form'));
-  }
-  
+  if (requestForm) requestForm.addEventListener('submit', (e) => handleFormSubmit(e, 'number-request-form'));
+
   const changeForm = document.getElementById('change-number-form');
-  if (changeForm) {
-    changeForm.addEventListener('submit', (e) => handleFormSubmit(e, 'change-number-form'));
-  }
+  if (changeForm) changeForm.addEventListener('submit', (e) => handleFormSubmit(e, 'change-number-form'));
 });
