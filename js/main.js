@@ -198,8 +198,8 @@ function renderRoster() {
     const tr = document.createElement('tr');
     let idCell = '—';
     if (member.iRacingId) {
-      const url = `https://members.iracing.com/membersite/member/Profile.do?custid=${member.iRacingId}`;
-      idCell = `<a href="${url}" target="_blank" rel="noopener" title="View iRacing Profile">${member.iRacingId}</a>`;
+      const url = `https://irstats.com/driver/${member.iRacingId}`;
+      idCell = `<a href="${url}" target="_blank" rel="noopener" title="View iRacing Stats Profile">${member.iRacingId}</a>`;
     }
 
     tr.innerHTML = `
